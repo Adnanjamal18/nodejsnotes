@@ -1,0 +1,2 @@
+Data read from input.txt: ${teztIn}
+ Date Created ${new Date()}
