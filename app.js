@@ -28,16 +28,20 @@ ri.on('close',()=>{
 // //* inside single quotes ('') ${...} is teated as normal text
 // fs.writeFileSync('./Files/output.txt',content)
 
-//!ecture 3
-//IN LAST LECTURE OUT CODE WAS A SYNCHRONOUS CODE (JAVASCRIPT IS S SINGLE THREADED PROGRAMMING LANGUAGE)
-//SO CODE FROM OUT LAST LECTURE EXECUTES ONE BY ONE IN THAT SINGLE THREAD
-//ONLY WHEN LAST LINE OF CODE IS EXECUTED THUS IS WHY SYNCHRONOUS CODE ARE BLOCKING CODE
- //* READFILE IS AN METHOD AN API PROVIDED BY NODE BUT THIS
- //*METHOD RUNS ASYNCHRONOUSLY SO
- fs.readFile('./Files/input.txt', 'utf-8',//!this part gets executed in background ONCE THE DATA IS READ OUR CALL BACK FUNCTION GETS CALLED IN MAIN THREAD
-    (err,data)=>{//! this call back function goes to main thread only when read file method reads file
-    console.log(data); 
-    /*uncomment to understand better//?console.log('reading file 2...')*/ 
- })
- console.log('reading file 2...')//! this part gets executed on main thread 
- 
+// //!ecture 3
+// //IN LAST LECTURE OUT CODE WAS A SYNCHRONOUS CODE (JAVASCRIPT IS S SINGLE THREADED PROGRAMMING LANGUAGE)
+// //SO CODE FROM OUT LAST LECTURE EXECUTES ONE BY ONE IN THAT SINGLE THREAD
+// //ONLY WHEN LAST LINE OF CODE IS EXECUTED THUS IS WHY SYNCHRONOUS CODE ARE BLOCKING CODE
+//  //* READFILE IS AN METHOD AN API PROVIDED BY NODE BUT THIS
+//  //*METHOD RUNS ASYNCHRONOUSLY SO
+//  fs.readFile('./Files/input.txt', 'utf-8',//!this part gets executed in background ONCE THE DATA IS READ OUR CALL BACK FUNCTION GETS CALLED IN MAIN THREAD
+//     (err,data)=>{//! this call back function goes to main thread only when read file method reads file
+//     console.log(data); 
+//     /*uncomment to understand better//?console.log('reading file 2...')*/ 
+//  })
+//  console.log('reading file 2...')//! this part gets executed on main thread 
+
+
+//!Lecture 4
+//on fs module we get read wrtite and more methods 
+//?readfile method reads file synchronously TO THIS METHOD WE PASS 3 ARGUMENTS FIRST IS PATH OF THE FILE
