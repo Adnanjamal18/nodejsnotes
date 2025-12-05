@@ -1,6 +1,6 @@
 //!import statement
-const readline= require('readline'); //?library(module) for read input output
-const fs= require('fs'); //?(module)for reading and writing files 
+const readline = require('readline'); //?library(module) for read input output
+const fs = require('fs'); //?(module)for reading and writing files 
 /*
 //!lecture 1
 //? READING INPUT AND WRITING INPUT
@@ -44,4 +44,20 @@ ri.on('close',()=>{
 
 //!Lecture 4
 //on fs module we get read wrtite and more methods 
-//?readfile method reads file synchronously TO THIS METHOD WE PASS 3 ARGUMENTS FIRST IS PATH OF THE FILE
+//?readfile method reads file synchronously TO THIS METHOD WE PASS 3 ARGUMENTS FIRST IS PATH OF THE FILE 
+fs.readFile(`./Files/start.txt`, `utf-8`, (error1, data1/*first argumentn will carry returned error if there is any second will carry dara which is read*/
+) => {
+    console.log(data1);
+    fs.readFile(`./Files/${data1}.txt`, 'utf-8', (error2, data2) => {
+        console.log(data2);
+
+        fs.readFile(`./Files/append.txt`, 'utf-8', (error3, data3) => {
+            console.log(data3);
+            fs.writeFile(`./Files/output.txt`, `${data2}\n\n${data3}\n\n date created= ${new Date()}`,
+                () => {
+                    console.log('file written successfully');
+                })
+        })
+    })
+})
+console.log('reading...');
