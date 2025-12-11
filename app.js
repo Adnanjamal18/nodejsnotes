@@ -156,3 +156,19 @@ ri.on('close',()=>{
 // ONCE THEY ARE REACHED IT WILL REASSEMBLE ALL PACKETS INTO ORIGNAL REQUEST 
 // NOW JOB OF IP IS TO ACTULLY SEND AND ROUTE ALL THESE PACKETS THROUGH THE INTERNET SO IT ENSURES THAT ALL PACKETS ARRIVE AT
 // RIGHT DESTINATION BY USING IP ADDRSS ON EACH OF THESE PACKETS 
+
+
+//! LECTURE 7
+html = fs.readFileSync('./Template/index.html', 'utf-8');
+//? STEP ONE CREATE SERVER
+const server = http.createServer((request,response)=>{
+    response.end(html)
+    console.log('A New request recived')
+})
+
+server.listen(8000,'127.0.0.1',()=>{
+console.log('server has started')
+})
+// server.listen(8000, '127.0.0.1',() => {
+//    console.log('server has started') 
+// })
