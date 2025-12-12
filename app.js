@@ -160,6 +160,7 @@ ri.on('close',()=>{
 
 //! LECTURE 7
 html = fs.readFileSync('./Template/index.html', 'utf-8');
+//? BROWSER FIRST MAKES REQUEST TO FAVICON.KO THEN TO OUR URL
 //? STEP ONE CREATE SERVER
 const server = http.createServer((request,response)=>{
     response.end(html)
@@ -169,6 +170,3 @@ const server = http.createServer((request,response)=>{
 server.listen(8000,'127.0.0.1',()=>{
 console.log('server has started')
 })
-// server.listen(8000, '127.0.0.1',() => {
-//    console.log('server has started') 
-// })
