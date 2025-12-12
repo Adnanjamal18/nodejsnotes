@@ -163,8 +163,17 @@ html = fs.readFileSync('./Template/index.html', 'utf-8');
 //? BROWSER FIRST MAKES REQUEST TO FAVICON.KO THEN TO OUR URL
 //? STEP ONE CREATE SERVER
 const server = http.createServer((request,response)=>{
-    response.end(html)
-    console.log('A New request recived')
+    let path = request.url;
+    if (path == '/'||path.toLocaleUpperCase()=='/home') {
+        response.end(path)
+    } else if (path.toLocaleLowerCase()=='/about') {
+        response.end('yoy are in about page')
+    } else if (path.toLocaleLowerCase()=='/contact') {
+        response.end('yoy are in contact page')
+    } else {
+        response.end ( ' page not found')
+    }
+
 })
 
 server.listen(8000,'127.0.0.1',()=>{
