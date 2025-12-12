@@ -158,7 +158,22 @@ ri.on('close',()=>{
 // RIGHT DESTINATION BY USING IP ADDRSS ON EACH OF THESE PACKETS 
 
 
-//! LECTURE 7
+// //! LECTURE 7
+// html = fs.readFileSync('./Template/index.html', 'utf-8');
+// //? BROWSER FIRST MAKES REQUEST TO FAVICON.KO THEN TO OUR URL
+// //? STEP ONE CREATE SERVER
+// const server = http.createServer((request,response)=>{
+//     response.end(html)
+//     console.log('A New request recived')
+// })
+
+// server.listen(8000,'127.0.0.1',()=>{
+// console.log('server has started')
+// })
+
+
+
+//! LECTURE 8
 html = fs.readFileSync('./Template/index.html', 'utf-8');
 //? BROWSER FIRST MAKES REQUEST TO FAVICON.KO THEN TO OUR URL
 //? STEP ONE CREATE SERVER
