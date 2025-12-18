@@ -1,1 +1,1 @@
-alert('Welcome to node app ');
+// alert('Welcome to node app '); resourse for lecture 7

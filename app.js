@@ -159,6 +159,7 @@ ri.on('close',()=>{
 
 
 // //! LECTURE 7
+//? how requestt response work
 // html = fs.readFileSync('./Template/index.html', 'utf-8');
 // //? BROWSER FIRST MAKES REQUEST TO FAVICON.KO THEN TO OUR URL
 // //? STEP ONE CREATE SERVER
@@ -173,31 +174,60 @@ ri.on('close',()=>{
 
 
 
-//! LECTURE 8
-//? WHAT IS ROUTING
-//? ROUTING DEFINES THE WAY IN WHICH THE CLIENT REQUESTS ARE HANDLED BY THE APPLICATION ENDPOINTS
-//* BY IMPLEMENTING ROUTING IN OUR APPLICATON WE CAN MAKE OUR APPLICATION RESPOND WITH DIFFERENT RESPONSES
-//* FOR DIFFERENT URLS
-//? FIRST OF ALL WE HAVE FILE BASED URL
-//!FILE BASED URL IS WHERE IN THE URL WE SPECIFY THE FILE NAME WHICH WE WANT TO ACCESS AND SEE IN THE BROWSER
-//? Eg  WWW.NODEAPP.COM/INDEX.HTML
-html = fs.readFileSync('./Template/index.html', 'utf-8');
-//? BROWSER FIRST MAKES REQUEST TO FAVICON.KO THEN TO OUR URL
-//? STEP ONE CREATE SERVER
-const server = http.createServer((request,response)=>{
-    let path = request.url;
-    if (path == '/'||path.toLocaleUpperCase()=='/home') {
-        response.end(path)
-    } else if (path.toLocaleLowerCase()=='/about') {
-        response.end('yoy are in about page')
-    } else if (path.toLocaleLowerCase()=='/contact') {
-        response.end('yoy are in contact page')
-    } else {
-        response.end ( ' page not found')
-    }
+// //! LECTURE 8
+// //? WHAT IS ROUTING
+// //? ROUTING DEFINES THE WAY IN WHICH THE CLIENT REQUESTS ARE HANDLED BY THE APPLICATION ENDPOINTS
+// //* BY IMPLEMENTING ROUTING IN OUR APPLICATON WE CAN MAKE OUR APPLICATION RESPOND WITH DIFFERENT RESPONSES
+// //* FOR DIFFERENT URLS
+// //? FIRST OF ALL WE HAVE FILE BASED URL
+// //!FILE BASED URL IS WHERE IN THE URL WE SPECIFY THE FILE NAME WHICH WE WANT TO ACCESS AND SEE IN THE BROWSER
+// //? Eg  WWW.NODEAPP.COM/INDEX.HTML
+// html = fs.readFileSync('./Template/index.html', 'utf-8');
+// //? BROWSER FIRST MAKES REQUEST TO FAVICON.KO THEN TO OUR URL
+// //? STEP ONE CREATE SERVER
+// const server = http.createServer((request,response)=>{
+//     let path = request.url;
+//     if (path == '/'||path.toLocaleUpperCase()=='/home') {
+//         response.end(html)
+//     } else if (path.toLocaleLowerCase()=='/about') {
+//         response.end('yoy are in about page')
+//     } else if (path.toLocaleLowerCase()=='/contact') {
+//         response.end('yoy are in contact page')
+//     } else {
+//         response.end ( ' page not found')
+//     }
 
-})
+// })
 
-server.listen(8000,'127.0.0.1',()=>{
-console.log('server has started')
-})
+// server.listen(8000,'127.0.0.1',()=>{
+// console.log('server has started')
+// })
+
+
+
+//! LECTURE 9
+// html = fs.readFileSync('./Template/index.html', 'utf-8')
+// const server = http.createServer((request,response)=>{
+//     let path = request.url;
+//     if (path == '/'||path.toLocaleUpperCase()=='/home') {
+//         response.end(html) //!the problem here is we cant send html response 
+//!in our index.js file we are using style.css and script.js file when we run our server
+//? the properties of index.html file do render (i.e h3 element and ) but not style we 
+//? defined in style.css for h3(h3) element and paragraph(p) element so on the servr nodejs
+//? is not able to find the file same is true for script.js file this is how noodejs works 
+//? inn nodejs we cannot directly use static files so static assets ( css ifle , script file , images)
+//     } else if (path.toLocaleLowerCase()=='/about') {
+//         response.end('yoy are in about page')
+//     } else if (path.toLocaleLowerCase()=='/contact') {
+//         response.end('yoy are in contact page')
+//     } else {
+//         response.end ( ' page not found')
+//     }
+
+// })
+
+// server.listen(8000,'127.0.0.1',()=>{
+// console.log('server has started')
+// })
+//! for now we write new html
+html = fs.readFileSync('././Template/index.html','utf-8')
