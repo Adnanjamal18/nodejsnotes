@@ -205,29 +205,115 @@ ri.on('close',()=>{
 
 
 
-//! LECTURE 9
-// html = fs.readFileSync('./Template/index.html', 'utf-8')
-// const server = http.createServer((request,response)=>{
+// //! LECTURE 9
+// //!sending html response
+// // html = fs.readFileSync('./Template/index.html', 'utf-8')
+// // const server = http.createServer((request,response)=>{
+// //     let path = request.url;
+// //     if (path == '/'||path.toLocaleUpperCase()=='/home') {
+// //         response.end(html) //!the problem here is we cant send html response 
+// //!in our index.js file we are using style.css and script.js file when we run our server
+// //? the properties of index.html file do render (i.e h3 element and ) but not style we 
+// //? defined in style.css for h3(h3) element and paragraph(p) element so on the servr nodejs
+// //? is not able to find the file same is true for script.js file this is how noodejs works 
+// //? inn nodejs we cannot directly use static files so static assets ( css ifle , script file , images)
+// //     } else if (path.toLocaleLowerCase()=='/about') {
+// //         response.end('yoy are in about page')
+// //     } else if (path.toLocaleLowerCase()=='/contact') {
+// //         response.end('yoy are in contact page')
+// //     } else {
+// //         response.end ( ' page not found')
+// //     }
+
+// // })
+
+// // server.listen(8000,'127.0.0.1',()=>{
+// // console.log('server has started')
+// // })
+// //
+// // ! for now we write new html
+// const html = fs.readFileSync('././Template/index.html','utf-8');
+// const server = http.createServer( (request,response)=>{
 //     let path = request.url;
-//     if (path == '/'||path.toLocaleUpperCase()=='/home') {
-//         response.end(html) //!the problem here is we cant send html response 
-//!in our index.js file we are using style.css and script.js file when we run our server
-//? the properties of index.html file do render (i.e h3 element and ) but not style we 
-//? defined in style.css for h3(h3) element and paragraph(p) element so on the servr nodejs
-//? is not able to find the file same is true for script.js file this is how noodejs works 
-//? inn nodejs we cannot directly use static files so static assets ( css ifle , script file , images)
-//     } else if (path.toLocaleLowerCase()=='/about') {
-//         response.end('yoy are in about page')
+//     if (path == '/'|| path.toLocaleUpperCase()=='/home') {
+//         response.end(html.replace('{{%CONTENTS%}}','you are in home page'))//! so now we are replacing {{%CONTENTS%}} in index.js with {{%CONTENTS%}} of app.js which was "You are in home page" earlier but problem was it worked for home page but for rest of pages it opened another tab
+//             } else if (path.toLocaleLowerCase()=='/about') {
+//         response.end(html.replace('{{%CONTENTS%}}','you are in about page'))
 //     } else if (path.toLocaleLowerCase()=='/contact') {
-//         response.end('yoy are in contact page')
+//         response.end(html.replace('{{%CONTENTS%}}','you are in Contact page'))
 //     } else {
-//         response.end ( ' page not found')
+//         response.end (html.replace('{{%CONTENTS%}}','you are in home page'))
 //     }
 
 // })
 
-// server.listen(8000,'127.0.0.1',()=>{
-// console.log('server has started')
+// server.listen(8000,'127.0.0.1'),()=>{
+//     console.log(
+//                'dasd'  
+//     )
+// }
+
+
+// //!LECTURE 10
+// //! SETTING HEADERS FOR RESPONSE 
+// const html = fs.readFileSync('././Template/index.html','utf-8');
+// const server = http.createServer( (request,response)=>{
+//     let path = request.url;
+//     if (path == '/'|| path.toLocaleLowerCase()=='/home') {
+//         response.writeHead(200);//!WITH WRITEHEAD METHOD WE CAN WRITE HEADERS AND THIS
+//         //!  METHOD SHOULD ALWAYS COME BEFORE ".end" METHOD 
+//         response.end(html.replace('{{%CONTENTS%}}','you are in home page'))//! so now we are replacing {{%CONTENTS%}} in index.js with {{%CONTENTS%}} of app.js which was "You are in home page" earlier but problem was it worked for home page but for rest of pages it opened another tab
+//             } 
+//      else if (path.toLocaleLowerCase()=='/about') {
+//         response.writeHead(200);
+//         response.end(html.replace('{{%CONTENTS%}}','you are in about page'))
+//     } 
+//     else if (path.toLocaleLowerCase()=='/contact') {
+//         response.writeHead(200);
+//         response.end(html.replace('{{%CONTENTS%}}','you are in Contact page'))
+//     } 
+//     else {
+//         response.writeHead(404);//! WE SEND ERROR 404 RESPONSE FOR CASE WE DONT HANDLE(CODE STANDS FOR RESOURSE NOT FOUND)
+//         response.end (html.replace('{{%CONTENTS%}}','ERROR 404, PAGE NOT FOUND'))
+//     }
+
 // })
-//! for now we write new html
-html = fs.readFileSync('././Template/index.html','utf-8')
+
+// server.listen(8000,'127.0.0.1'),()=>{
+//     console.log(
+//                'dasd'  
+//     )
+// }
+
+//! define headers 
+
+const html = fs.readFileSync('././Template/index.html','utf-8');
+const server = http.createServer( (request,response)=>{
+    let path = request.url;
+    if (path == '/'|| path.toLocaleUpperCase()=='/home') {
+        response.writeHead(200,{//! inside curly brace you can write headers , custom headers as key value pairs
+            'content-type': 'text/html',
+             'my-header': 'HELLO WORLD'
+        })
+        response.end(html.replace('{{%CONTENTS%}}','you are in home page'))
+            } 
+    else if (path.toLocaleLowerCase()=='/about') {
+        esponse.writeHead(200)
+        response.end(html.replace('{{%CONTENTS%}}','you are in about page'))
+    } 
+    else if (path.toLocaleLowerCase()=='/contact') {
+        esponse.writeHead(200)
+        response.end(html.replace('{{%CONTENTS%}}','you are in Contact page'))
+    }
+    else {
+        esponse.writeHead(404)
+        response.end (html.replace('{{%CONTENTS%}}','you are in home page'))
+    }
+
+})
+
+server.listen(8000,'127.0.0.1'),()=>{
+    console.log(
+               'dasd'  
+    )
+}
