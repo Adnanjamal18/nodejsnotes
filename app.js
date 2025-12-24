@@ -306,7 +306,7 @@ const server = http.createServer( (request,response)=>{
         response.end(html.replace('{{%CONTENTS%}}','you are in Contact page'))
     }
     else {
-        esponse.writeHead(404)
+        response.writeHead(404)
         response.end (html.replace('{{%CONTENTS%}}','you are in home page'))
     }
 
