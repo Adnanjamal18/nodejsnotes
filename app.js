@@ -285,35 +285,54 @@ ri.on('close',()=>{
 //     )
 // }
 
-//! define headers 
+// //! define headers 
 
+// const html = fs.readFileSync('././Template/index.html','utf-8');
+// const server = http.createServer( (request,response)=>{
+//     let path = request.url;
+//     if (path == '/'|| path.toLocaleUpperCase()=='/home') {
+//         response.writeHead(200,{//! inside curly brace you can write headers , custom headers as key value pairs
+//             'content-type': 'text/html',
+//              'my-header': 'HELLO WORLD'
+//         })
+//         response.end(html.replace('{{%CONTENTS%}}','you are in home page'))
+//             } 
+//     else if (path.toLocaleLowerCase()=='/about') {
+//         esponse.writeHead(200)
+//         response.end(html.replace('{{%CONTENTS%}}','you are in about page'))
+//     } 
+//     else if (path.toLocaleLowerCase()=='/contact') {
+//         esponse.writeHead(200)
+//         response.end(html.replace('{{%CONTENTS%}}','you are in Contact page'))
+//     }
+//     else {
+//         response.writeHead(404)
+//         response.end (html.replace('{{%CONTENTS%}}','you are in home page'))
+//     }
+
+// })
+
+// server.listen(8000,'127.0.0.1'),()=>{
+//     console.log(
+//                'dasd'  
+//     )
+// }
+
+//! LECTURE 11
+//! Working with JSON data | Fundamentals of NODE JS
+//! json stands for java script object notation just like xml it tooo is data format 
+//! a json objcxt has a key value pair , so it has a property and the property name is and property  name is wrapped in double quotes or single 
+//! so here is a property and it has a value of 0  "id": 0 so json is a data formal where we store data like a javascript object 
+//! the only difference between javascript object and json object is that iin json object the property name is wrapped in quotes eg image 2.1
 const html = fs.readFileSync('././Template/index.html','utf-8');
-const server = http.createServer( (request,response)=>{
-    let path = request.url;
-    if (path == '/'|| path.toLocaleUpperCase()=='/home') {
-        response.writeHead(200,{//! inside curly brace you can write headers , custom headers as key value pairs
-            'content-type': 'text/html',
-             'my-header': 'HELLO WORLD'
+const server = http.createServer((request,response)=>{
+    let path = request.url; 
+    if (path == '/'||path.toLocaleLowerCase=='/home') {
+        response.writeHead(200,{
+
         })
-        response.end(html.replace('{{%CONTENTS%}}','you are in home page'))
-            } 
-    else if (path.toLocaleLowerCase()=='/about') {
-        esponse.writeHead(200)
-        response.end(html.replace('{{%CONTENTS%}}','you are in about page'))
-    } 
-    else if (path.toLocaleLowerCase()=='/contact') {
-        esponse.writeHead(200)
-        response.end(html.replace('{{%CONTENTS%}}','you are in Contact page'))
     }
-    else {
-        response.writeHead(404)
-        response.end (html.replace('{{%CONTENTS%}}','you are in home page'))
-    }
-
 })
-
-server.listen(8000,'127.0.0.1'),()=>{
-    console.log(
-               'dasd'  
-    )
-}
+server.listen(8000,'127.0.0.1',()=>{
+console.log('server started')
+})
