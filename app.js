@@ -324,44 +324,44 @@ ri.on('close',()=>{
 //! a json objcxt has a key value pair , so it has a property and the property name is and property  name is wrapped in double quotes or single 
 //! so here is a property and it has a value of 0  "id": 0 so json is a data formal where we store data like a javascript object 
 //! the only difference between javascript object and json object is that iin json object the property name is wrapped in quotes eg image 2.1
-// const html = fs.readFileSync('././Template/index.html','utf-8');
-// const server = http.createServer((request,response)=>{
-//     let path = request.url; 
-//     if (path == '/'||path.toLocaleLowerCase()=='/home') {
-//         response.writeHead(200,
-//             {
-//          'content-type': 'text/html' ,
-//          'my-header': 'hello world',
-//         })
-//      response.end(html.replace('{{%CONTENTS%}}','you are in home page'));
-//     } 
-//     else if (path.toLocaleLowerCase()=='/about') {
-//         response.writeHead(200,
-//             {
-//                 'content-type': 'text/html' ,
-//                 'my-header': 'hello world',
-//             })
-//     response.end(html.replace('{{%%CONTENTS}}','you are in about page'));
-//     }
+const html = fs.readFileSync('././Template/index.html','utf-8');
+const server = http.createServer((request,response)=>{
+    let path = request.url; 
+    if (path === '/'||path.toLocaleLowerCase()==='/home') {
+        response.writeHead(200,
+            {
+         'content-type': 'text/html' ,
+         'my-header': 'hello world',
+        });
+     response.end(html.replace('{{%CONTENTS%}}','you are in home page'));
+    } 
+    else if (path.toLocaleLowerCase()==='/about') {
+        response.writeHead(200,
+            {
+                'content-type': 'text/html' ,
+                'my-header': 'hello world',
+            });
+    response.end(html.replace('{{%CONTENTS%}}','you are in about page'));
+    }
 
-//     else if (path.toLocaleLowerCase() =='/contact') {
-//          response.writeHead(200,
-//             {
-//              'content-type': 'text/html' ,
-//              'my-header': 'hello world',
-//             })
-//     response.end(html.replace('{{%%CONTENTS}}','you are in contact page'));
-//     }
+    else if (path.toLocaleLowerCase() ==='/contact') {
+         response.writeHead(200,
+            {
+             'content-type': 'text/html' ,
+             'my-header': 'hello world',
+            });
+    response.end(html.replace('{{%CONTENTS%}}','you are in contact page'));
+    }
     
-//     else{
-//     response.writeHead(200,
-//             {
-//              'content-type': 'text/html' ,
-//              'my-header': 'hello world',
-//             })
-//     response.end(html.replace('{{%%CONTENTS}}','error 404 , page not found'));
-//     }
-// })
-// server.listen(8000,'127.0.0.1',()=>{
-// console.log('server started')
-// })
+    else{
+    response.writeHead(404,
+            {
+             'content-type': 'text/html' ,
+             'my-header': 'hello world',
+            });
+    response.end(html.replace('{{%CONTENTS%}}','error 404 , page not found'));
+    }
+})
+server.listen(8000,'127.0.0.1',()=>{
+console.log('server started')
+})
