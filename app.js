@@ -187,7 +187,7 @@ ri.on('close',()=>{
 // //? STEP ONE CREATE SERVER
 // const server = http.createServer((request,response)=>{
 //     let path = request.url;
-//     if (path == '/'||path.toLocaleUpperCase()=='/home') {
+//     if (path == '/'||path.toLocaleLowerCase()=='/home') {
 //         response.end(html)
 //     } else if (path.toLocaleLowerCase()=='/about') {
 //         response.end('yoy are in about page')
@@ -210,7 +210,7 @@ ri.on('close',()=>{
 // // html = fs.readFileSync('./Template/index.html', 'utf-8')
 // // const server = http.createServer((request,response)=>{
 // //     let path = request.url;
-// //     if (path == '/'||path.toLocaleUpperCase()=='/home') {
+// //     if (path == '/'||path.toLocaleLowerCase()=='/home') {
 // //         response.end(html) //!the problem here is we cant send html response 
 // //!in our index.js file we are using style.css and script.js file when we run our server
 // //? the properties of index.html file do render (i.e h3 element and ) but not style we 
@@ -235,7 +235,7 @@ ri.on('close',()=>{
 // const html = fs.readFileSync('././Template/index.html','utf-8');
 // const server = http.createServer( (request,response)=>{
 //     let path = request.url;
-//     if (path == '/'|| path.toLocaleUpperCase()=='/home') {
+//     if (path == '/'|| path.toLocaleLowerCase()=='/home') {
 //         response.end(html.replace('{{%CONTENTS%}}','you are in home page'))//! so now we are replacing {{%CONTENTS%}} in index.js with {{%CONTENTS%}} of app.js which was "You are in home page" earlier but problem was it worked for home page but for rest of pages it opened another tab
 //             } else if (path.toLocaleLowerCase()=='/about') {
 //         response.end(html.replace('{{%CONTENTS%}}','you are in about page'))
@@ -290,7 +290,7 @@ ri.on('close',()=>{
 // const html = fs.readFileSync('././Template/index.html','utf-8');
 // const server = http.createServer( (request,response)=>{
 //     let path = request.url;
-//     if (path == '/'|| path.toLocaleUpperCase()=='/home') {
+//     if (path.toLocaleLowerCase()=='/home') {
 //         response.writeHead(200,{//! inside curly brace you can write headers , custom headers as key value pairs
 //             'content-type': 'text/html',
 //              'my-header': 'HELLO WORLD'
@@ -298,23 +298,23 @@ ri.on('close',()=>{
 //         response.end(html.replace('{{%CONTENTS%}}','you are in home page'))
 //             } 
 //     else if (path.toLocaleLowerCase()=='/about') {
-//         esponse.writeHead(200)
+//         response.writeHead(200)
 //         response.end(html.replace('{{%CONTENTS%}}','you are in about page'))
 //     } 
 //     else if (path.toLocaleLowerCase()=='/contact') {
-//         esponse.writeHead(200)
+//         response.writeHead(200)
 //         response.end(html.replace('{{%CONTENTS%}}','you are in Contact page'))
 //     }
 //     else {
 //         response.writeHead(404)
-//         response.end (html.replace('{{%CONTENTS%}}','you are in home page'))
+//         response.end (html.replace('{{%CONTENTS%}}','error 404'))
 //     }
 
 // })
 
 // server.listen(8000,'127.0.0.1'),()=>{
 //     console.log(
-//                'dasd'  
+//                'server started'  
 //     )
 // }
 
@@ -324,15 +324,44 @@ ri.on('close',()=>{
 //! a json objcxt has a key value pair , so it has a property and the property name is and property  name is wrapped in double quotes or single 
 //! so here is a property and it has a value of 0  "id": 0 so json is a data formal where we store data like a javascript object 
 //! the only difference between javascript object and json object is that iin json object the property name is wrapped in quotes eg image 2.1
-const html = fs.readFileSync('././Template/index.html','utf-8');
-const server = http.createServer((request,response)=>{
-    let path = request.url; 
-    if (path == '/'||path.toLocaleLowerCase=='/home') {
-        response.writeHead(200,{
+// const html = fs.readFileSync('././Template/index.html','utf-8');
+// const server = http.createServer((request,response)=>{
+//     let path = request.url; 
+//     if (path == '/'||path.toLocaleLowerCase()=='/home') {
+//         response.writeHead(200,
+//             {
+//          'content-type': 'text/html' ,
+//          'my-header': 'hello world',
+//         })
+//      response.end(html.replace('{{%CONTENTS%}}','you are in home page'));
+//     } 
+//     else if (path.toLocaleLowerCase()=='/about') {
+//         response.writeHead(200,
+//             {
+//                 'content-type': 'text/html' ,
+//                 'my-header': 'hello world',
+//             })
+//     response.end(html.replace('{{%%CONTENTS}}','you are in about page'));
+//     }
 
-        })
-    }
-})
-server.listen(8000,'127.0.0.1',()=>{
-console.log('server started')
-})
+//     else if (path.toLocaleLowerCase() =='/contact') {
+//          response.writeHead(200,
+//             {
+//              'content-type': 'text/html' ,
+//              'my-header': 'hello world',
+//             })
+//     response.end(html.replace('{{%%CONTENTS}}','you are in contact page'));
+//     }
+    
+//     else{
+//     response.writeHead(200,
+//             {
+//              'content-type': 'text/html' ,
+//              'my-header': 'hello world',
+//             })
+//     response.end(html.replace('{{%%CONTENTS}}','error 404 , page not found'));
+//     }
+// })
+// server.listen(8000,'127.0.0.1',()=>{
+// console.log('server started')
+// })
