@@ -2,6 +2,7 @@
 const readline = require('readline'); //?library(module) for read input output
 const fs = require('fs'); //?(module)for reading and writing files 
 const http = require('http');
+const { json } = require('stream/consumers');
 /*
 //!lecture 1
 //? READING INPUT AND WRITING INPUT
@@ -31,7 +32,7 @@ ri.on('close',()=>{
 
 // //!ecture 3
 // //IN LAST LECTURE OUT CODE WAS A SYNCHRONOUS CODE (JAVASCRIPT IS S SINGLE THREADED PROGRAMMING LANGUAGE)
-// //SO CODE FROM OUT LAST LECTURE EXECUTES ONE BY ONE IN THAT SINGLE THREAD
+// //SO CODE FROM OUT LAST LECTURE EXECUTES ONE BY ONE IN THAT SINGLE THREAD , if one line is under execution that thread will remain blocked untill line is read then only next line executes
 // //ONLY WHEN LAST LINE OF CODE IS EXECUTED THUS IS WHY SYNCHRONOUS CODE ARE BLOCKING CODE
 //  //* READFILE IS AN METHOD AN API PROVIDED BY NODE BUT THIS
 //  //*METHOD RUNS ASYNCHRONOUSLY SO
@@ -45,7 +46,7 @@ ri.on('close',()=>{
 
 // //!Lecture 4
 // //on fs module we get read wrtite and more methods 
-// //?readfile method reads file synchronously TO THIS METHOD WE PASS 3 ARGUMENTS FIRST IS PATH OF THE FILE 
+// //?readfile method reads file synchronously TO THIS METHOD WE PASS 3 ARGUMENTS FIRST IS PATH OF THE FILE , second is encoding , third is callback function
 // fs.readFile(`./Files/start.txt`, `utf-8`, (error1, data1/*first argumentn will carry returned error if there is any second will carry dara which is read*/
 // ) => {
 //     console.log(data1);
@@ -351,6 +352,15 @@ const server = http.createServer((request,response)=>{
              'my-header': 'hello world',
             });
     response.end(html.replace('{{%CONTENTS%}}','you are in contact page'));
+    }
+    else if (path.toLocaleLowerCase()==='/products') {
+         response.writeHead(200,{
+             'content-type': 'application/json'
+            })
+        fs.readFileSync('./Data/products.json','utf-8',(error,data)=>{
+            let products = JSON.parse(data)
+          response.end(data)
+        })
     }
     
     else{
