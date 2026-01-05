@@ -322,10 +322,90 @@ ri.on('close',()=>{
 //! LECTURE 11
 //! Working with JSON data | Fundamentals of NODE JS
 //! json stands for java script object notation just like xml it tooo is data format 
-//! a json objcxt has a key value pair , so it has a property and the property name is and property  name is wrapped in double quotes or single 
+//! a json objcct has a key value pair , so it has a property and the property name is wrapped in double quotes or single 
 //! so here is a property and it has a value of 0  "id": 0 so json is a data formal where we store data like a javascript object 
 //! the only difference between javascript object and json object is that iin json object the property name is wrapped in quotes eg image 2.1
+//? NOW WHY  ARE WE TALKNG ABOUT THIS JSON DATA HERE THATS BECAUSE WHEN WE CREATE A REAL WORLD APPLICATIOINS USING NODE JS THERE 
+//? WE MIGHT BE HAVING A DATABASE SERVER IN THE BACKEND AND THAT DATABASE IS PROLLY BE A NO SQL NON RELATIONAL DATABASE LIKE MONGO DB AND IN SUCH DATABASES WE STORE DATA IN JSON FORMAT
+//*SO FROM OUR NODE APPLICATION WHEN WE WILL FETCH SOME DATA FROM A NO SQL DATABASE WE WILL GET THAT DATA AS A JSON OBJECT AND THEN WE WILL HAVE TO TRANSFORM THIS JSON OBJECT TO JAVASCRIPT OBJECT IN ORDER TO WORK WITH IT
+
+// const html = fs.readFileSync('././Template/index.html','utf-8');
+// const server = http.createServer((request,response)=>{
+//     let path = request.url; 
+//     if (path === '/'||path.toLocaleLowerCase()==='/home') {
+//         response.writeHead(200,
+//             {
+//          'content-type': 'text/html' ,
+//          'my-header': 'hello world',
+//         });
+//      response.end(html.replace('{{%CONTENTS%}}','you are in home page'));
+//     } 
+//     else if (path.toLocaleLowerCase()==='/about') {
+//         response.writeHead(200,
+//             {
+//                 'content-type': 'text/html' ,
+//                 'my-header': 'hello world',
+//             });
+//     response.end(html.replace('{{%CONTENTS%}}','you are in about page'));
+//     }
+
+//     else if (path.toLocaleLowerCase() ==='/contact') {
+//          response.writeHead(200,
+//             {
+//              'content-type': 'text/html' ,
+//              'my-header': 'hello world',
+//             });
+//     response.end(html.replace('{{%CONTENTS%}}','you are in contact page'));
+//     }
+//     else if (path.toLocaleLowerCase()==='/products') {
+//          response.writeHead(200,{
+//              'content-type': 'application/json'
+//             })
+//         fs.readFile('./Data/products.json','utf-8',(error,data)=>{
+            //NOW USUALLY WHEN WE ARE CREATING WEB APPLICATIN THERE WE DONT SEND JSON RESPONSE THERE WE SEND A HTML RESPONSE 
+          // BUT WHEN WE ARE CREAING A WEB API IN THAT CASE WE SEND JSON DATA IN RESPONSE //! NOW WE WILL TALK ABOUT WEBAPI LATER FOR NOW 
+          //* TO CREATE SIMPLE WEB APPLICATION HERE INSTEAD OF SENDING JSON DATA WE WANT TO SEND HTML RESPONSE AND IN THAT HTML RESPONSE WE WANT TO SHOW PRODUCT OBSECTS IN WEB PAGE
+   //! FIRST WE NEED TO CONVERT THAT JSON DATA INTO A JAVASCRIPT OBJECT FOR THAT WE CAN USE JSON.PARSE AND PASS JSON DATA TO IT
+//           response.end(data)
+//         })
+//     }
+    
+//     else{
+//     response.writeHead(404,
+//             {
+//              'content-type': 'text/html' ,
+//              'my-header': 'hello world',
+//             });
+//     response.end(html.replace('{{%CONTENTS%}}','error 404 , page not found'));
+//     }
+// })
+// server.listen(8000,'127.0.0.1',()=>{
+// console.log('server started')
+// })
+
+
 const html = fs.readFileSync('././Template/index.html','utf-8');
+//FOR NOW READ FILE METHOD FROM OUR LAST CODE WAS GOING TO REREAD FILE SO IF THOUSAND REQUESTS ARE MADE IT WILL READ THOUSAND TIMES
+//!FOR THAT WE USE READFILESYNC WHICH WILL RETURN DATA AND WE STORE THAT AS PARSED IN A VARIABLE 
+let products = JSON.parse( fs.readFileSync('./Data/products.json','utf-8') )
+let productListHtml = fs.readFileSync('./Template/product-list.html','utf-8')
+
+let productHtmlArray = products.map((product)=>{
+   let output = productListHtml.replace('{{%IMAGE%}}', product.productImage);
+    output = output.replace('{{%NAME%}}', product.name);
+    output = output.replace('{{%MODELNAME%}}', product.modeName);
+    output = output.replace('{{%MODELNO%}}', product.modelNumber);
+    output = output.replace('{{%SIZE%}}', product.size);
+    output = output.replace('{{%CAMERA%}}', product.camera);
+    output = output.replace('{{%PRICE%}}', product.price);
+    output = output.replace('{{%COLOR%}}', product.color);
+    output = output.replace('{{%ID%}}', product.id);
+    output = output.replace('{{%ROM%}}', product.ROM);
+    output = output.replace('{{%DESC%}}', product.Description);
+
+    return output;
+
+})
 const server = http.createServer((request,response)=>{
     let path = request.url; 
     if (path === '/'||path.toLocaleLowerCase()==='/home') {
@@ -354,13 +434,9 @@ const server = http.createServer((request,response)=>{
     response.end(html.replace('{{%CONTENTS%}}','you are in contact page'));
     }
     else if (path.toLocaleLowerCase()==='/products') {
-         response.writeHead(200,{
-             'content-type': 'application/json'
-            })
-        fs.readFileSync('./Data/products.json','utf-8',(error,data)=>{
-            let products = JSON.parse(data)
-          response.end(data)
-        })
+       let productResponseHtml = html.replace('{{%CONTENTS%}}',productHtmlArray.join(','))
+         response.writeHead(200,{ 'content-type': 'text/html' })
+        response.end(productResponseHtml)
     }
     
     else{
